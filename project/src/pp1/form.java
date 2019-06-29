@@ -1,80 +1,146 @@
 package pp1;
-import javafx.application.Application; 
-import static javafx.application.Application.launch; 
-import javafx.geometry.Insets; 
-import javafx.geometry.Pos; 
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
-import javafx.scene.Scene; 
-import javafx.scene.control.Button; 
-import javafx.scene.control.PasswordField; 
-import javafx.scene.layout.GridPane; 
-import javafx.scene.text.Text; 
-import javafx.scene.control.TextField; 
-import javafx.stage.Stage;  
-public class form extends Application{
-	@Override 
-	   public void start(Stage stage) {      
-	      //creating label email 
-	      Text text1 = new Text("Email");       
-	      
-	      //creating label password 
-	      Text text2 = new Text("Password"); 
-	       
-	      //Creating Text Filed for email        
-	      TextField textField1 = new TextField();       
-	      
-	      //Creating Text Filed for password        
-	      PasswordField textField2 = new PasswordField();  
-	       
-	      //Creating Buttons 
-	      Button button1 = new Button("Submit"); 
-	      Button button2 = new Button("Clear");  
-	      
-	      //Creating a Grid Pane 
-	      GridPane gridPane = new GridPane();    
-	      
-	      //Setting size for the pane 
-	      gridPane.setMinSize(400, 200); 
-	      
-	      //Setting the padding  
-	      gridPane.setPadding(new Insets(10, 10, 10, 10)); 
-	      
-	      //Setting the vertical and horizontal gaps between the columns 
-	      gridPane.setVgap(5); 
-	      gridPane.setHgap(5);       
-	      
-	      //Setting the Grid alignment 
-	      gridPane.setAlignment(Pos.CENTER); 
-	       
-	      //Arranging all the nodes in the grid 
-	      gridPane.add(text1, 0, 0); 
-	      gridPane.add(textField1, 1, 0); 
-	      gridPane.add(text2, 0, 1);       
-	      gridPane.add(textField2, 1, 1); 
-	      gridPane.add(button1, 0, 2); 
-	      gridPane.add(button2, 1, 2); 
-	       
-	      //Styling nodes  
-	      button1.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;"); 
-	      button2.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;"); 
-	       
-	      text1.setStyle("-fx-font: normal bold 20px 'serif' "); 
-	      text2.setStyle("-fx-font: normal bold 20px 'serif' ");  
-	      gridPane.setStyle("-fx-background-color: BEIGE;"); 
-	       
-	      //Creating a scene object 
-	      Scene scene = new Scene(gridPane); 
-	       
-	      //Setting title to the Stage 
-	      stage.setTitle("CSS Example"); 
-	         
-	      //Adding scene to the stage 
-	      stage.setScene(scene);
-	      
-	      //Displaying the contents of the stage 
-	      stage.show(); 
-	   }      
-	   public static void main(String args[]){ 
-	      launch(args); 
-	   } 
-	}
+public class form extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        primaryStage.setTitle("Registration Form JavaFX Application");
+
+        // Create the registration form grid pane
+        GridPane gridPane = createRegistrationFormPane();
+        // Add UI controls to the registration form grid pane
+        addUIControls(gridPane);
+        // Create a scene with registration form grid pane as the root node
+        Scene scene = new Scene(gridPane, 2000, 800);
+        // Set the scene in primary stage	
+        primaryStage.setScene(scene);
+        
+        primaryStage.show();
+    }
+
+
+    private GridPane createRegistrationFormPane() {
+        // Instantiate a new Grid Pane
+        GridPane gridPane = new GridPane();
+
+        // Position the pane at the center of the screen, both vertically and horizontally
+        gridPane.setAlignment(Pos.CENTER);
+
+        // Set a padding of 20px on each side
+        gridPane.setPadding(new Insets(40, 40, 40, 40));
+
+        // Set the horizontal gap between columns
+        gridPane.setHgap(10);
+
+        // Set the vertical gap between rows
+        gridPane.setVgap(10);
+
+        // Add Column Constraints
+
+        // columnOneConstraints will be applied to all the nodes placed in column one.
+        ColumnConstraints columnOneConstraints = new ColumnConstraints(100, 100, Double.MAX_VALUE);
+        columnOneConstraints.setHalignment(HPos.RIGHT);
+
+        // columnTwoConstraints will be applied to all the nodes placed in column two.
+        ColumnConstraints columnTwoConstrains = new ColumnConstraints(200,200, Double.MAX_VALUE);
+        columnTwoConstrains.setHgrow(Priority.ALWAYS);
+
+        gridPane.getColumnConstraints().addAll(columnOneConstraints, columnTwoConstrains);
+
+        return gridPane;
+    }
+
+    private void addUIControls(GridPane gridPane) {
+        // Add Header
+        Label headerLabel = new Label("Registration Form");
+        headerLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+        gridPane.add(headerLabel, 0,0,2,1);
+        GridPane.setHalignment(headerLabel, HPos.CENTER);
+        GridPane.setMargin(headerLabel, new Insets(20, 0,20,0));
+
+        // Add Name Label
+        Label nameLabel = new Label("Full Name : ");
+        gridPane.add(nameLabel, 0,1);
+
+        // Add Name Text Field
+        TextField nameField = new TextField();
+        nameField.setPrefHeight(40);
+        gridPane.add(nameField, 1,1);
+
+
+        // Add Email Label
+        Label emailLabel = new Label("Father's name : ");
+        gridPane.add(emailLabel, 0, 2);
+
+        // Add Email Text Field
+        TextField emailField = new TextField();
+        emailField.setPrefHeight(40);
+        gridPane.add(emailField, 1, 2);
+
+        // Add Password Label
+     //   Label passwordLabel = new Label("Password : ");
+       // gridPane.add(passwordLabel, 0, 3);
+
+        // Add Password Field
+      //  PasswordField passwordField = new PasswordField();
+       //passwordField.setPrefHeight(40);
+        //gridPane.add(passwordField, 1, 3);
+        
+        
+
+        // Add Submit Button
+        Button submitButton = new Button("Submit");
+        submitButton.setPrefHeight(40);
+        submitButton.setDefaultButton(true);
+        submitButton.setPrefWidth(100);
+        gridPane.add(submitButton, 0, 4, 2, 1);
+        GridPane.setHalignment(submitButton, HPos.CENTER);
+        GridPane.setMargin(submitButton, new Insets(20, 0,20,0));
+
+        submitButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(nameField.getText().isEmpty()) {
+                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter your name");
+                    return;
+                }
+                if(emailField.getText().isEmpty()) {
+                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter your email id");
+                    return;
+                }
+                if(passwordField.getText().isEmpty()) {
+                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter a password");
+                    return;
+                }
+
+                showAlert(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Registration Successful!", "Welcome " + nameField.getText());
+            }
+        });
+    }
+
+    private void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.initOwner(owner);
+        alert.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
