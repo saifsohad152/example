@@ -1,16 +1,18 @@
 package pp1;
-
-public class form {
+import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+public class form extends Application{
 	
-
-	    // Your program begins with a call to main(). 
-	    // Prints "Hello, World" to the terminal window. 
-	    public static void main(String args[]) 
-	    { 
-	        System.out.println("Hello, World"); 
-	        System.out.println("Hello, World"); 
-	        System.out.println("Hello, World"); 
-	        
-	    } 
-	} 
+	 @Override
+	     public void start(Stage primaryStage) throws Exception {
+	        Label label = new Label("Hello World");
+	        label.setAlignment(Pos.CENTER);
+	        primaryStage.setScene(new Scene(label, 300, 250));
+	        primaryStage.setTitle("Hello World Application");
+	        primaryStage.show();
+	    }
+	}
 
